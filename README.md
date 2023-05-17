@@ -14,5 +14,5 @@ El proyecto está dividido en 3 carpetas en las cuales se pueden ver las distint
 
 ## Crédito
 
-Hecho por Oscar Gracia Cobo, Sergio Simón Fern 
+Hecho por Oscar Gracia Cobo, Sergio Simón Fernández y Sergio Misas Vírseda
 
