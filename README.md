@@ -12,4 +12,7 @@ Todas estas partes simularán el funcionamiento de una empresa de inspección t�
 
 El proyecto está dividido en 3 carpetas en las cuales se pueden ver las distintas partes del proyecto 
 
+## Crédito
+
+Hecho por Oscar Gracia Cobo, Sergio Simón Fern 
 
