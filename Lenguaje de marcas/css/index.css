@@ -2,20 +2,122 @@
     margin: 0;
 }
 
+body {
+    background-color: #005a94;
+}
+
 img.logo {
     width: 7rem;
+    margin-top: 1rem;
 }
 
 header {
     width: 100%;
-    height: 60rem;
-    background: #bc4e9c;
-    background: -webkit-linear-gradient(to right, hsla(340, 95%, 50%, 0.459), hsla(317, 45%, 52%, 0.664)), url(../images/talleres-top-logo.jpg);
-    background: linear-gradient(to right, rgb(177, 155, 234), hsla(264, 55%, 61%, 0.664)), url(../images/talleres-top-logo.jpg),  ;
-    background-size: cover;
-    /* Cambia el tamaño de la imagen de fondo para cubrir todo el contenedor */
-    background-attachment: fixed;
-    /* propiedad especifica si la imagen de fondo debe desplazarse o ser fija*/
-    position: relative;
-    height: 21rem;
+    background: #bc4e9c; 
+     /* fallback for old browsers */
+    background: linear-gradient(to right, hsla(214, 87%, 41%, 0.459), hsla(187, 80%, 54%, 0.664)),url(../images/talleres-top-logo.jpg); 
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+   background-size: cover; /* Cambia el tamaño de la imagen de fondo para cubrir todo el contenedor */
+   background-attachment: fixed; /* propiedad especifica si la imagen de fondo debe desplazarse o ser fija*/
+   position: relative;
+    margin-top: -1rem;
+}
+
+div.head-top {
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+    margin-left: 0.5rem;
+    margin-top: 0.5rem;
+    margin-right: 1.5rem;
+}
+
+div.buttom-nav {
+    margin-top: -1rem;
+}
+
+div.linea {
+    margin-bottom: 2rem;
+    border-style:solid;
+    border-left:none ;
+    border-bottom:none ;
+    border-right:none ;
+    border-top: white 0.01rem solid;
+}
+
+a.nav {
+    padding: 1rem;    
+    /* border-style: solid; */
+    border-width: 0.2rem;
+    background-color: #005a94;
+    border-radius: 1.35rem;
+    color: white;
+    margin-left: 0.5rem;
+    text-decoration: none;
+}
+
+a.nav:hover {
+    padding: 1rem;    
+    /* border-style: solid; */
+    border-width: 0.2rem;
+    background-color: white;
+    border-radius: 1.35rem;
+    color: #005a94;
+    margin-left: 0.5rem;
+}
+
+section.textos-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2.5rem;
+    margin-bottom: 2rem;
+    gap: 1rem;
+}
+
+h1.h1-header {
+    color: #005a94;
+    font-size: 3.3rem;
+}
+
+h1.h1-header:hover {
+    color: #c6dfef;
+}
+
+h2.h2-header {
+    color: #005a94;
+    font-size: 2rem;
+}
+
+h2.h2-header:hover {
+    color: #c6dfef;
+}
+
+img.infoImage {
+    width: 40rem;
+    border-radius: 0.5rem;
+}
+
+div.info {
+    display: flex;
+    align-items: center;
+    margin-top: 5rem;
+    margin-bottom: 1rem;
+    margin-left: 5rem;
+    margin-right: 5rem;
+    gap: 2.5rem;
+}
+
+h1.h1-infoText {
+    margin-bottom: 0.5rem;
+    color: rgb(190, 226, 237);
+}
+
+div.separatorInfo {
+    border: white solid 0.001rem;
+    margin-bottom: 2rem;
+}
+
+p.p-infoText {
+    color: rgb(193, 203, 232);
 }
