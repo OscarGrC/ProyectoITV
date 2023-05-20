@@ -1,6 +1,8 @@
 package graciamisasimon.proyectoitv.repositories
 
+import graciamisasimon.proyectoitv.models.Cita
 import graciamisasimon.proyectoitv.models.Cliente
+import graciamisasimon.proyectoitv.models.InformeITV
 import graciamisasimon.proyectoitv.models.Vehiculo
 
 interface ITVRepository {
@@ -17,5 +19,10 @@ interface ITVRepository {
         fun deleteAllClientes()
         fun saveAllClientes(clientes: List<Cliente>): List<Cliente>
         fun saveAllVehiculos(vehiculos: List<Vehiculo>): List<Vehiculo>
+        fun createCita(cita:Cita):Cita
+        fun deleteCita(cita: Cita):Cita
+        fun upDateCita(cita: Cita):Cita
+        fun createInformeCita(cita: Cita):InformeITV
+        fun deleteInformeCita(cita: Cita):InformeITV
 
 }
