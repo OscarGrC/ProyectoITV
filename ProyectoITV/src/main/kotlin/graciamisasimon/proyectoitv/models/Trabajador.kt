@@ -2,11 +2,10 @@ package graciamisasimon.proyectoitv.models
 
 import graciamisasimon.proyectoitv.models.enums.TipoTrabajador
 import java.time.LocalDate
-import java.util.UUID
 
 data class Trabajador (val estacionId:String, val nombre:String, val telefono:String, val correo:String,
-           val usuario:String, val tipo: TipoTrabajador, val contraseña:String, val fechaContratacion:LocalDate,
-           val plusGerencia:Boolean = false){
+                       val usuario:String, val tipo: TipoTrabajador, val password:String, val fechaContratacion:LocalDate,
+                       val plusGerencia:Boolean = false){
     val sueldo:Int
         get() = CalcularSueldo()
     private fun CalcularSueldo():Int{
