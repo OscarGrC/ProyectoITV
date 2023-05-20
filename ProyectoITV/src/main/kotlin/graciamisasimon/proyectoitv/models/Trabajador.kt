@@ -37,7 +37,7 @@ data class Trabajador (val estacionId:String, val nombre:String, val telefono:St
            anyoContratacion+=3
        }
        if(mesContratacion<LocalDate.now().month.value && anyoContratacion==LocalDate.now().year){
-           plus-=100
+           plus-=10
        }
        return  plus
    }
