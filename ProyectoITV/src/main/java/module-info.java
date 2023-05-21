@@ -33,7 +33,7 @@ module graciamisasimon.proyectoitv {
     exports graciamisasimon.proyectoitv.controllers;
 
     // Rutas
-//    opens graciamisasimon.proyectoitv.routes to javafx.fxml;
+//    gcd gitopens graciamisasimon.proyectoitv.routes to javafx.fxml;
 //    exports graciamisasimon.proyectoitv.routes;
 
     // dtos, abrimos a Gson
