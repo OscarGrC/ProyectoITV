@@ -58,17 +58,28 @@
                 <h1>Envíanos tus comentarios y nos pondremos en contacto contigo en la mayor brevedad posible.</h1>
                 <div class="colum">
                     <form id="miFormulario" class="colum1">
+                        <p class="nombre">Nombre</p>
                         <input type="text" id="nombre" placeholder="Nombre">
+                        <p id="correo2" style="display: none;">Correo electrónico</p>
                         <input type="text" id="correo" placeholder="Correo electrónico" style="display: none;">
+                        <p id="matricula2" style="display: none;">Matrícula del vehículo</p>
                         <input type="text" id="matricula" placeholder="Matrícula del vehículo" style="display: none;">
                     </form>
                     <form id="miFormulario" class="colum1">
+                        <p class="apellido">Apellido</p>
                         <input type="text" id="apellido" placeholder="Apellido">
+                        <p id="telefono2" style="display: none;">Teléfono</p>
                         <input type="text" id="telefono" placeholder="Teléfono" style="display: none;">
-                        <input type="text" id="tipo" placeholder="Tipo del vehículo" style="display: none;">
+                        <p id="tipo2" style="display: none;">Seleciona un tipo</p>
+                        <select id="tipo" style="display: none;">
+                          <option value="">-- Seleciona un tipo de vehiculo --</option>
+                          <option value="option">option</option>
+                          <option value="option">option</option>
+                          <option value="option">option</option>
+                        </select>
                     </form>
                 </div>
-                <button type="button" class="boton-enviar" id="enviar" style="display: block;">Enviar</button>
+                <button type="button" class="boton-enviar" id="enviar" style="display: none;">Enviar</button>
             </div>
             <!-- Js que muestra campos segun se van rellenando -->
             <script src="../js/contacto-form.js"></script>
