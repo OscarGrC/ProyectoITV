@@ -6,7 +6,7 @@ import graciamisasimon.proyectoitv.models.InformeITV
 fun Cita.toInformeITV():InformeITV{
     return InformeITV(
         propietarioNombre = vehiculo.propietario.nombre, propietarioApellidos = vehiculo.propietario.apellidos,
-        propietarioTelefono = vehiculo.propietario.telefono, propietarioCorreo = vehiculo.propietario.correo,
+        propietarioTelefono = vehiculo.propietario.telefonoCliente, propietarioCorreo = vehiculo.propietario.correoCliente,
         matricula=vehiculo.matricula,marca=vehiculo.marca,modelo=vehiculo.modelo,tipoVehiculo=vehiculo.tipoVehiculo.name
         ,tipoMotor =vehiculo.tipoMotor.name,fechaMatriculacion = vehiculo.fechaMatriculacion.toString(),
         fechaRevision =fechaCita.toString(), trabajadorNombre = trabajador.nombre, trabajadorUsuario=trabajador.usuario,

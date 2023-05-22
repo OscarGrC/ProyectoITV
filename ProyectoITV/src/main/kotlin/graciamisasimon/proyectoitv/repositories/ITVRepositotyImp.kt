@@ -19,8 +19,8 @@ class ITVRepositotyImp(private val dataBaseClient ):ITVRepository {
                 dni = cliente.dni,
                 nombre = cliente.nombre,
                 apellidos = cliente.apellidos,
-                correo = cliente.correo,
-                telefono = cliente.telefono
+                correo = cliente.correoCliente,
+                telefono = cliente.telefonoCliente
             )
         }
         return cliente
@@ -52,8 +52,8 @@ class ITVRepositotyImp(private val dataBaseClient ):ITVRepository {
             dni = cliente.dni,
             nombre = cliente.nombre,
             apellidos = cliente.apellidos,
-            email = cliente.correo,
-            telefono = cliente.telefono
+            email = cliente.correoCliente,
+            telefono = cliente.telefonoCliente
         )
         return cliente
     }

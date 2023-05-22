@@ -20,8 +20,8 @@ fun Cliente.validate():Result<Cliente, VehiculosError> {
             return Err(VehiculosError.ValidationProblem("Fallo con el dni"))
         }
         // Expresion regular de email
-        if (this.correo.isEmpty() || !Regex("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}\$")
-                .matches(this.correo)) {
+        if (this.correoCliente.isEmpty() || !Regex("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}\$")
+                .matches(this.correoCliente)) {
             return Err(VehiculosError.ValidationProblem("Fallo con el Email"))
         }
         return Ok(this)

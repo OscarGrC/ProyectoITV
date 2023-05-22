@@ -47,7 +47,7 @@
                                                       <Font name="System Bold" size="12.0" />
                                                    </font>
                                                 </Label>
-                                                <Label text="Making happen">
+                                                <Label text="Make it happen">
                                                    <VBox.margin>
                                                       <Insets top="10.0" />
                                                    </VBox.margin>
@@ -390,7 +390,7 @@
                                        <children>
                                           <ImageView fitHeight="18.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../../../../../../../Downloads/check.png" />
+                                                <Image url="@../icons/check.png" />
                                              </image>
                                              <VBox.margin>
                                                 <Insets left="5.0" />
@@ -403,7 +403,7 @@
                                        <children>
                                           <ImageView fitHeight="18.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../../../../../../../Downloads/nainainain.png" />
+                                                <Image url="@../icons/nainainain.png" />
                                              </image>
                                              <VBox.margin>
                                                 <Insets left="5.0" />
@@ -425,7 +425,7 @@
                                        <children>
                                           <ImageView fitHeight="18.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../../../../../../../Downloads/check.png" />
+                                                <Image url="@../icons/check.png" />
                                              </image>
                                              <VBox.margin>
                                                 <Insets left="5.0" />
@@ -438,7 +438,7 @@
                                        <children>
                                           <ImageView fitHeight="18.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../../../../../../../Downloads/nainainain.png" />
+                                                <Image url="@../icons/nainainain.png" />
                                              </image>
                                              <VBox.margin>
                                                 <Insets left="5.0" />

@@ -9,7 +9,7 @@ class ITVApplication : Application() {
     override fun start(stage: Stage) {
         val fxmlLoader = FXMLLoader(ITVApplication::class.java.getResource("views/main-view.fxml"))
         val scene = Scene(fxmlLoader.load(), 1050.0, 740.0)
-        stage.title = "Hello!"
+        stage.title = "ITV en ETV!"
         stage.scene = scene
         stage.show()
     }
