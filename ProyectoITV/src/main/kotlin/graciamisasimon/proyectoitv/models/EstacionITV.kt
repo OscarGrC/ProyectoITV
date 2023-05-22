@@ -1,4 +1,4 @@
 package graciamisasimon.proyectoitv.models
 
-class EstacionITV {
+data class EstacionITV (){
 }
