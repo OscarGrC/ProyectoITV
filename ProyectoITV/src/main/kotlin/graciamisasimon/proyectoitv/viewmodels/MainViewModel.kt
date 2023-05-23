@@ -24,7 +24,7 @@ class MainViewModel(
     init {
         logger.debug { "Inicializando ExpedientesViewModel" }
         loadCitasFromRepository() // Cargamos los datos del repositorio
-        loadTypes() // Cargamos los tipos de repetidor
+        loadTypes() // Cargamos los tipos de busqueda
     }
 
     private fun loadTypes() {
@@ -41,7 +41,7 @@ class MainViewModel(
 
     private fun loadCitasFromRepository() {
         logger.debug { "Cargando citas del repositorio" }
-        val lista = repository.findAllCitas()
+        val lista = repository.findAllCita()
         logger.debug { "Cargando citas del repositorio: ${lista.size}" }
         updateState(lista)
     }
@@ -49,15 +49,14 @@ class MainViewModel(
     // Actualiza el estado de la aplicación con los datos de ese instante en el estado
     private fun updateState(listaAlumnos: List<Vehiculo>) {
         logger.debug { "Actualizando estado de Aplicacion" }
-        val numAprobados = listaAlumnos.count { it.isAprobado() }
-        val notaMedia = listaAlumnos.map { it.calificacion }.average().round(2)
-        val alumnoSeleccionado = AlumnoFormulario()
+
+        val vehiculoSeleccionado =MainFormulario()
 
         state.value = state.value.copy(
             alumnos = listaAlumnos.sortedBy { it.apellidos }, // Ordenamos por apellidos
             numAprobados = numAprobados,
             notaMedia = notaMedia,
-            alumnoSeleccionado = alumnoSeleccionado
+            alumnoSeleccionado = vehiculoSeleccionado
         )
     }
 
@@ -246,6 +245,7 @@ class MainViewModel(
         val typesTipo: List<String> = listOf(),
         val typesMotor: List<String> = listOf(),
         val typesMarca: List<String> = listOf(),
+        val listaCombo: List<String> = listOf(" ","TipoVehiculo",("TipoMotor"),("DNI"),)
 
         val vehiculos: List<Vehiculo> = listOf(),
         val citas: List<Cita> = listOf(),

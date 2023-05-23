@@ -121,7 +121,7 @@ class MainController  : KoinComponent {
         logger.debug { "actuacionSobreImagen" }
         FileChooser().run {
             title = "Selecciona una imagen"
-            extensionFilters.addAll(FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg"))
+            extensionFilters.addAll(FileChooser.ExtensionFilter("Imagenes", "*.png", "*.jpg", "*.jpeg"))
             showOpenDialog(RoutesManager.activeStage)
         }?.let {
             imagenVehiculo.image = Image(it.toURI().toString())
@@ -132,7 +132,7 @@ class MainController  : KoinComponent {
     private fun initBindings() {
         logger.debug { "Inicializando bindings" }
         // comboBoxe
-        comboTipo.items = FXCollections.observableArrayList(viewModel.state.value.typesCoches)
+        comboTipo.items = FXCollections.observableArrayList(viewModel.state.value.listaCombo)
         comboTipo.selectionModel.selectFirst()
 
         // Tablas
@@ -156,7 +156,6 @@ class MainController  : KoinComponent {
 
 
         viewModel.state.addListener { _, oldState, newState ->
-            updatesEstadisticas(oldState, newState)
             updatesFormulario(oldState, newState)
             updatesTabla(newState, oldState)
         }
@@ -174,34 +173,25 @@ class MainController  : KoinComponent {
     }
 
     private fun updatesFormulario(
-        oldState: ExpedientesViewModel.ExpedienteState,
-        newState: ExpedientesViewModel.ExpedienteState
+        oldState: MainViewModel.MainState,
+        newState: MainViewModel.MainState
+
     ) {
-        if (oldState.alumnoSeleccionado != newState.alumnoSeleccionado) {
+        if (oldState.vehiculoTablaSeleccionado != newState.vehiculoTablaSeleccionado) {
             textAlumnoNumero.text =
-                if (newState.alumnoSeleccionado.numero == Alumno.NEW_ALUMNO) "" else newState.alumnoSeleccionado.numero.toString()
-            textAlumnoApellidos.text = newState.alumnoSeleccionado.apellidos
-            textAlumnoNombre.text = newState.alumnoSeleccionado.nombre
-            textAlumnoEmail.text = newState.alumnoSeleccionado.email
-            dateAlumnoFechaNacimiento.value = newState.alumnoSeleccionado.fechaNacimiento
+                if (newState.vehiculoTablaSeleccionado.numero == Alumno.NEW_ALUMNO) "" else newState.vehiculoTablaSeleccionado.numero.toString()
+            textAlumnoApellidos.text = newState.vehiculoTablaSeleccionado.apellidos
+            textAlumnoNombre.text = newState.vehiculoTablaSeleccionado.nombre
+            textAlumnoEmail.text = newState.vehiculoTablaSeleccionado.email
+            dateAlumnoFechaNacimiento.value = newState.vehiculoTablaSeleccionado.fechaNacimiento
             textAlumnoCalificacion.text =
-                if (newState.alumnoSeleccionado.calificacion == 0.0) "" else newState.alumnoSeleccionado.calificacion.toLocalNumber()
-            checkAlumnoRepetidor.isSelected = newState.alumnoSeleccionado.repetidor
-            imageAlumno.image = newState.alumnoSeleccionado.imagen
+                if (newState.vehiculoTablaSeleccionado.calificacion == 0.0) "" else newState.vehiculoTablaSeleccionado.calificacion.toLocalNumber()
+            checkAlumnoRepetidor.isSelected = newState.vehiculoTablaSeleccionado.repetidor
+            imageAlumno.image = newState.vehiculoTablaSeleccionado.imagen
         }
     }
 
-    private fun updatesEstadisticas(
-        oldState: ExpedientesViewModel.ExpedienteState,
-        newState: ExpedientesViewModel.ExpedienteState
-    ) {
-        if (oldState.numAprobados != newState.numAprobados) {
-            textNumAprobados.text = newState.numAprobados.toString()
-        }
-        if (oldState.notaMedia != newState.notaMedia) {
-            textNotaMedia.text = newState.notaMedia.toString()
-        }
-    }
+
 
 
     private fun initEventos() {
