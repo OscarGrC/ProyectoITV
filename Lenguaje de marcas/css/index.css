@@ -47,7 +47,6 @@ div.linea {
 
 a.nav {
     padding: 1rem;    
-    /* border-style: solid; */
     border-width: 0.2rem;
     background-color: #005a94;
     border-radius: 1.35rem;
@@ -58,7 +57,6 @@ a.nav {
 
 a.nav:hover {
     padding: 1rem;    
-    /* border-style: solid; */
     border-width: 0.2rem;
     background-color: #0BC5E3;
     border-radius: 1.35rem;
@@ -100,7 +98,6 @@ img.presentacion-butom {
 
 img.infoImage {
     width: 100%;
-    /* width: 40rem; */
     border-radius: 0.5rem;
 }
 
