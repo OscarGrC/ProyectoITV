@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="../css/contacto.css">
     <title>ProyectoITV - Contacta</title>
 </head>
-
 <body>
     <header>
         <!-- Cabezera de la página -->
@@ -21,10 +20,9 @@
                     <p class="logo-eslogan">Si a nosotros nos funciona a ti también</p>
                 </div>
             </div>
-
+            <!-- Botones de navegación -->
             <div class="buttom-nav">
                 <div class="linea"></div>
-                <!-- Botones de navegación -->
                 <nav>
                     <a href="../index.html" class="nav">Inicio</a>
                     <a href="#" class="nav">Servicios</a>
@@ -39,7 +37,6 @@
         <!-- <img src="../images/ola-big.png" class="oladiv"> -->
         <img src="../images/ola.png" class="oladiv">
     </header>
-
     <main>
         <table>
             <tr>
@@ -54,31 +51,32 @@
                         <img src="../images/number-1.svg" class="number-form">
                         <h1 class="titlo-title-form">Datos del usuario</h1>
                     </div>
+                    <!-- Formulario 1 -->
                     <form id="miFormulario" class="miform">
                         <div class="form-center">
                             <div class="caja-form">
                                 <div class="colum1">
                                     <div class="caja-form">
                                         <p class="p-form">Nombre</p>
-                                        <input type="text" placeholder="Nombre">
+                                        <input type="text" placeholder="Nombre" id="nombre">
                                     </div>
                                     <div class="caja-form">
                                         <p class="p-form">DNI </p>
-                                        <input type="text" placeholder="DNI">
+                                        <input type="text" placeholder="DNI" id="dni">
                                     </div>
                                     <div class="caja-form">
                                         <p class="p-form">Correo</p>
-                                        <input type="text" placeholder="Correo electronico">
+                                        <input type="text" placeholder="Correo electronico" id="correo">
                                     </div>
                                 </div>
                                 <div class="colum2">
                                     <div class="caja-form">
                                         <p class="p-form">Apellido</p>
-                                        <input type="text" placeholder="Apellido">
+                                        <input type="text" placeholder="Apellido" id="apellido">
                                     </div>
                                     <div class="caja-form">
                                         <p class="p-form">Teléfono</p>
-                                        <input type="text" placeholder="Teléfono">
+                                        <input type="text" placeholder="Teléfono" id="telefono">
                                     </div>
                                 </div>
                             </div>
@@ -99,21 +97,22 @@
                         <img src="../images/number-2.svg" class="number-form">
                         <h1 class="titlo-title-form">Datos de vehiculo</h1>
                     </div>
+                    <!-- Formulario 2 -->
                     <form id="miFormulario" class="miform">
                         <div class="form-center">
                             <div class="caja-form">
                                 <div class="colum1">
                                     <div class="caja-form">
                                         <p class="p-form">Matricula</p>
-                                        <input type="text" placeholder="Matricula">
+                                        <input type="text" placeholder="Matricula" id="matricula">
                                     </div>
                                     <div class="caja-form">
                                         <p class="p-form">Modelo </p>
-                                        <input type="text" placeholder="Modelo">
+                                        <input type="text" placeholder="Modelo" id="modelo">
                                     </div>
                                     <div class="caja-form">
                                         <p class="p-form">Tipo Vehiculo</p>
-                                        <select id="tipo">
+                                        <select id="tipoCoche">
                                             <option value="">-- Seleciona un tipo --</option>
                                             <option value="option">Coche</option>
                                             <option value="option">Moto</option>
@@ -123,22 +122,18 @@
                                     </div>
                                     <div class="caja-form">
                                         <p class="p-form">Fecha matriculación</p>
-                                        <input type="date" id="start" name="trip-start" value="" min="1900-01-01"
+                                        <input type="date" id="fechaMatri" name="trip-start" value="" min="1900-01-01"
                                             max="2023-12-31">
                                     </div>
                                 </div>
                                 <div class="colum2">
                                     <div class="caja-form">
                                         <p class="p-form">Marca</p>
-                                        <input type="text" placeholder="Marca">
-                                    </div>
-                                    <div class="caja-form">
-                                        <p class="p-form">Teléfono</p>
-                                        <input type="text" placeholder="Teléfono">
+                                        <input type="text" placeholder="Marca" id="marca">
                                     </div>
                                     <div class="caja-form">
                                         <p class="p-form">Tipo Motor</p>
-                                        <select id="tipo">
+                                        <select id="tipoMotor">
                                             <option value="">-- Seleciona un tipo --</option>
                                             <option value="option">Gasolina</option>
                                             <option value="option">Diesel</option>
@@ -165,17 +160,18 @@
                         <img src="../images/number-3.svg" class="number-form">
                         <h1 class="titlo-title-form">Fecha cita y centro</h1>
                     </div>
+                    <!-- Formulario 3 -->
                     <form id="miFormulario" class="miform">
                         <div class="form-center">
                             <div class="caja-form">
                                 <div class="colum1">
                                     <div class="caja-form">
                                         <p class="p-form">Fecha cita</p>
-                                        <input type="date" idvalue="" min="2023-05-01" max="2023-12-31">
+                                        <input type="date" id="fechaCita" min="2023-05-01" max="2023-12-31">
                                     </div>
                                     <div class="caja-form">
                                         <p class="p-form">Centro</p>
-                                        <select id="hora">
+                                        <select id="lugar">
                                             <option value="">-- Seleciona un centro --</option>
                                             <option value="option">Lorancar</option>
                                             <option value="option">RepairExpress</option>
@@ -229,11 +225,11 @@
             <div class="content-foo2">
                 <div class="content-logo">
                     <h3>Telefono</h3>
-                    <p>*484 4894 654*</p>
+                    <p>640 81 25 52</p>
                 </div>
                 <div class="content-logo">
                     <h3>Correo</h3>
-                    <p>aaaaaaa@gmail.com</p>
+                    <a href="inspeccionamostucochesa@gmail.com" class="correo"><p>inspeccionamostucochesa@gmail.com</p></a>
                 </div>
             </div>
 
@@ -249,11 +245,12 @@
         <img src="../images/footer-butom.png" class="footer-butom">
         </svg></div>
         <div class="legal">
-            <a href="#">Aviso legal y protección de datos</a>
-            <a href="#">Propiedad Intelectual</a>
-            <a href="#">Cookies</a>
+            <a href="#" class="legal-link">Aviso legal y protección de datos</a>
+            <a href="#" class="legal-link">Propiedad Intelectual</a>
+            <a href="#" class="legal-link">Cookies</a>
         </div>
     </footer>
+    <script src="../js/contacto-form.js"></script>
 </body>
 
 </html>

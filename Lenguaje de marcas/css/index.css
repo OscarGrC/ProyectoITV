@@ -17,6 +17,12 @@ img.logo {
     margin-top: -10%;
 }
 
+.servicio-text {
+    display: flex;
+    align-items: start;
+    width: 100%;
+}
+
 .logo-nombre {
     color: #003A61;
     font-size: 3rem;
@@ -75,7 +81,7 @@ section.textos-header {
 
 h1.h1-header {
     color: #a4eaff;
-    font-size: 3.3rem;
+    font-size: 5rem;
 }
 
 h1.h1-header:hover {
@@ -115,10 +121,16 @@ h1.h1-infoText {
     border-bottom: white solid 0.005rem;
     padding-bottom: 0.5rem;
     margin-bottom: 2rem;
+    font-size: 2.75rem;
 }
 
 p.p-infoText {
     color: rgb(193, 203, 232);
+    font-size: 1.20rem;
+}
+
+a.correo {
+    color: black;
 }
 
 section.servicios {
@@ -217,7 +229,7 @@ footer{
     margin-top: 2rem;
 }
 
-a {
+a.legal-link {
     color: white;
 }
 

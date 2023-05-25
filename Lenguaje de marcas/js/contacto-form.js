@@ -1,65 +1,27 @@
-// Obtiene el id de los campos del formulario
-const nombre = document.getElementById("nombre");
-const apellido = document.getElementById("apellido");
-const correo = document.getElementById("correo");
-const telefono = document.getElementById("telefono");
-const matricula = document.getElementById("matricula");
-const tipo = document.getElementById("tipo");
-const enviar = document.getElementById("enviar");
 
-// Agregar un listener al campo1 y campo2 para controlar la visibilidad del campo3 y campo4 
-nombre.addEventListener("input", function() {
-  if (nombre.value !== "" && apellido.value !== "") {
-    correo.style.display = "block";
-    telefono.style.display = "block";
-  } else {
-    correo.style.display = "none";
-    telefono.style.display = "none";
-  }
-});
+// Obtener referencia al botón de enviar
+const botonEnviar = document.getElementById("enviar");
 
-apellido.addEventListener("input", function() {
-    if (nombre.value !== "" && apellido.value !== "") {
-        correo.style.display = "block";
-        telefono.style.display = "block";
-      } else {
-        correo.style.display = "none";
-        telefono.style.display = "none";
-      }
-})
+// Agregar evento click al botón
+botonEnviar.addEventListener("click", function (event) {
+    // Obtener referencias a los campos del formulario
+    const nombre = document.getElementById("nombre").value;
+    const apellido = document.getElementById("apellido").value;
+    const dni = document.getElementById("dni").value;
+    const correo = document.getElementById("correo").value;
 
-correo.addEventListener("input", function() {
-    if (correo.value !== "" && telefono.value !== "") {
-        matricula.style.display = "block";
-        tipo.style.display = "block";
+    // Verificar si todos los campos están completos
+    if (nombre != "" && apellido != "" && dni != "" && correo != "") {
+        // Cambiar el color del botón a azul
+        botonEnviar.style.backgroundColor = "blue";
+
+        // Enviar el formulario por correo (código de envío de correo aquí)
+        // ...
     } else {
-        matricula.style.display = "none";
-        tipo.style.display = "none";
+        // Mostrar mensaje de error si faltan campos
+        alert("Por favor, completa todos los campos del formulario.");
     }
-});
 
-telefono.addEventListener("input", function() {
-    if (correo.value !== "" && telefono.value !== "") {
-        matricula.style.display = "block";
-        tipo.style.display = "block";
-    } else {
-        matricula.style.display = "none";
-        tipo.style.display = "none";
-    }
-});
-
-enviar.addEventListener("input", function() {
-    if (matricula.value !== "" && tipo.value !== "") {
-        enviar.display = "block";
-    } else {
-        enviar.display = "none";
-    }
-});
-
-tipo.addEventListener("input", function() {
-    if (matricula.value !== "" && tipo.value !== "") {
-        enviar.style.display = "block";
-    } else {
-        enviar.style.display = "none";
-    }
+    // Evitar que el formulario se envíe automáticamente
+    event.preventDefault();
 });
