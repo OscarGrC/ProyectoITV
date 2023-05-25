@@ -23,7 +23,7 @@ fun Cita.toCitaDto():CitaDto{
         apellidos = vehiculo.propietario.apellidos,telefonoCliente=vehiculo.propietario.telefonoCliente,
         correoCliente=vehiculo.propietario.correoCliente,dni=vehiculo.propietario.dni, imagen = vehiculo.imagen,
     // ahora la fecha de la cita y valores prueba
-    fechaCita=fechaCita.toString(),frenado= valoresPruebas.frenado.toString(),
+    fechaCita=fechaCita.toString(), horaCita = horaCita, frenado= valoresPruebas.frenado.toString(),
         contaminacion=valoresPruebas.contaminacion.toString(),interiores=valoresPruebas.interiores.toString(),
     luces=valoresPruebas.luces.toString(),favorable=valoresPruebas.favorable.toString())
 }
@@ -38,5 +38,5 @@ fun CitaDto.toCita():Cita {
         TipoMotor.valueOf(tipoMotor), LocalDate.parse(fechaMatriculacion), LocalDate.parse(fechaUlimaRevision),
         propietario = localCliente, imagen
     )
- return Cita(localTrabajador,localVehiculo, LocalDateTime.parse(fechaCita))
+ return Cita(localTrabajador,localVehiculo, LocalDate.parse(fechaCita),horaCita)
 }

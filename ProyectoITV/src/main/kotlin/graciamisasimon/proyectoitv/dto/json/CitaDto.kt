@@ -9,7 +9,7 @@ class CitaDto(
     val tipoMotor: String, val fechaMatriculacion: String, val fechaUlimaRevision: String, val imagen:String,
     val nombreCliente:String, val apellidos:String, val telefonoCliente:String, val correoCliente:String,val dni:String,
     // ahora la fecha de la cita y valores prueba
-    val fechaCita: String,var frenado:String, var contaminacion:String,var interiores:String,
+    val fechaCita: String,val horaCita:String,var frenado:String, var contaminacion:String,var interiores:String,
     var luces:String, var favorable:String
     ) {
 

@@ -2,7 +2,6 @@ package graciamisasimon.proyectoitv.repositories
 
 import graciamisasimon.proyectoitv.models.Cita
 import graciamisasimon.proyectoitv.models.Cliente
-import graciamisasimon.proyectoitv.models.InformeITV
 import graciamisasimon.proyectoitv.models.Vehiculo
 
 interface ITVRepository {
