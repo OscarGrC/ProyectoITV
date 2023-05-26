@@ -47,7 +47,7 @@ class MainViewModel(
     }
 
     // Actualiza el estado de la aplicación con los datos de ese instante en el estado
-    private fun updateState(listaAlumnos: List<Vehiculo>) {
+    private fun updateState(listaVehiculos: List<Vehiculo>) {
         logger.debug { "Actualizando estado de Aplicacion" }
 
         val vehiculoSeleccionado =MainFormulario()
@@ -245,7 +245,7 @@ class MainViewModel(
         val typesTipo: List<String> = listOf(),
         val typesMotor: List<String> = listOf(),
         val typesMarca: List<String> = listOf(),
-        val listaCombo: List<String> = listOf(" ","TipoVehiculo",("TipoMotor"),("DNI"),)
+        val listaCombo: List<String> = listOf(" ","TipoVehiculo",("TipoMotor"),("DNI"),),
 
         val vehiculos: List<Vehiculo> = listOf(),
         val citas: List<Cita> = listOf(),

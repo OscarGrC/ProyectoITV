@@ -14,9 +14,7 @@ private val lang = locale.displayLanguage
 private val country = locale.displayCountry
 private val LocaleES = Locale("es", "ES")
 
-/***
- * @author:dev.joseluisgs
- */
+
 fun LocalDateTime.toLocalDate(): String {
     return this.format(
         DateTimeFormatter

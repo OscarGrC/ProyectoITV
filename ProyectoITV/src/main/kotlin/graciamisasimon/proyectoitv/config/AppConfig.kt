@@ -1,6 +1,7 @@
 package graciamisasimon.proyectoitv.config
 
 import mu.KotlinLogging
+import org.koin.core.component.KoinComponent
 import java.io.File
 import java.io.InputStream
 import java.util.*
@@ -10,7 +11,7 @@ private val logger = KotlinLogging.logger {}
 
 private const val CONFIG_FILE_NAME = "application.properties"
 
-class AppConfig {
+class AppConfig: KoinComponent {
 
     val APP_PATH = System.getProperty("user.dir")
 

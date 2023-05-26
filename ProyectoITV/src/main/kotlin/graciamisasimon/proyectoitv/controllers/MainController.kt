@@ -117,6 +117,10 @@ class MainController  : KoinComponent {
         initEventos()
     }
 
+    private fun initEventos() {
+        TODO("Not yet implemented")
+    }
+
     private fun actuacionSobreImagen() {
         logger.debug { "actuacionSobreImagen" }
         FileChooser().run {
@@ -156,8 +160,9 @@ class MainController  : KoinComponent {
 
 
         viewModel.state.addListener { _, oldState, newState ->
-            updatesFormulario(oldState, newState)
-            updatesTabla(newState, oldState)
+//            updatesFormulario(oldState, newState)
+//            updatesTabla(newState, oldState)
+            TODO()
         }
     }
 

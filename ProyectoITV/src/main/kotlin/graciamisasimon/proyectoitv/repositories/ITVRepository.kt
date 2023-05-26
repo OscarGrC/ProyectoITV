@@ -23,7 +23,7 @@ interface ITVRepository {
         fun upDateCita(cita: Cita):Cita
         fun deleteAllCita()
         fun findAllCita():List<Cita>
-        fun createInformeCita(cita: Cita):InformeITV
-        fun deleteInformeCita(cita: Cita):InformeITV
+        fun createInformeCita(cita: Cita): Cita
+        fun deleteInformeCita(cita: Cita): Cita
 
 }

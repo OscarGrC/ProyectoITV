@@ -4,6 +4,7 @@ import graciamisasimon.proyectoitv.controllers.MainController
 import javafx.application.Application
 import javafx.fxml.FXMLLoader
 import javafx.scene.Scene
+import javafx.scene.control.Alert
 import javafx.scene.image.Image
 import javafx.scene.layout.Pane
 import javafx.stage.Modality
@@ -25,6 +26,7 @@ object RoutesManager {
     private lateinit var _activeStage: Stage // La ventana actual
     val activeStage: Stage
         get() = _activeStage
+
     lateinit var app: Application // La aplicación
 
     // Podemos tener una cache de escenas cargadas
@@ -59,8 +61,12 @@ object RoutesManager {
         stage.isResizable = false
         stage.icons.add(Image(getResourceAsStream("icons/logo.jpg")))
         stage.setOnCloseRequest {
-            val controller = fxmlLoader.getController<MainController>()
-            controller.onOnCloseAction()
+            Alert(Alert.AlertType.WARNING)
+                .apply {
+                    title = "Atención"
+                    headerText = "Se va a cerrar la aplicación"
+                    contentText = "Seguro que quieres cerrar la aplicación"
+                }.showAndWait()
         }
         stage.scene = scene
         mainStage = stage

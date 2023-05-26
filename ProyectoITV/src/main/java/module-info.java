@@ -17,9 +17,12 @@ module graciamisasimon.proyectoitv {
 
     // SqlDeLight
     requires runtime.jvm;
-    requires sqlite.driver;
+//    requires sqlite.driver;
     // Como no pongas esto te vas a volver loco con los errores
     requires java.sql;
+
+    //MariaDB
+    requires org.mariadb.jdbc;
 
     // Koin
     requires koin.core.jvm;
