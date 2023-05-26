@@ -154,7 +154,7 @@ table {
 .titulo-caja-form {
     display: flex;
     flex-direction: row;
-    width: 100%;
+    /* width: 100%; */
     align-items: center;
     margin-left: 5rem;
     margin-bottom: 3rem;
