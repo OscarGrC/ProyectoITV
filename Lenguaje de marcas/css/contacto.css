@@ -16,6 +16,10 @@ img.logo {
     font-size: 3rem;
 }
 
+.correo {
+    color: black;
+}
+
 .logo-eslogan {
     color: #003A61;
     font-size:large;
@@ -119,7 +123,7 @@ td.cell-form {
 
 .effect-form {
     margin-top: -6rem;
-    margin-left: 32rem;
+    margin-left: 28rem;
     width: auto;
     border: #e6f1f8;
 }
@@ -150,7 +154,7 @@ table {
 .titulo-caja-form {
     display: flex;
     flex-direction: row;
-    width: 100%;
+    /* width: 100%; */
     align-items: center;
     margin-left: 5rem;
     margin-bottom: 3rem;
@@ -203,21 +207,10 @@ div.colum {
     padding: 1rem;
     width: 10rem;
     height: 4rem;
-    background-color: #0071b9;
-    border: #0071b9 solid;
-    color: white;
-    border-radius: 2rem;
-}
-
-.boton-enviar:hover {
-    margin-top: 2rem;
-    padding: 1rem;
-    width: 10rem;
-    height: 4rem;
-    background-color: #56beff;
-    border: #56beff solid;
-    color: white;
-    border-radius: 2rem;
+    /* background-color: #405562; */
+    /* border: #0071b9 solid; */
+    /* color: white; */
+    border-radius: 1.2rem;
 }
 
 form.miform {
@@ -258,7 +251,7 @@ footer{
     margin-top: 2rem;
 }
 
-a {
+a.legal-link {
     color: white;
 }
 
