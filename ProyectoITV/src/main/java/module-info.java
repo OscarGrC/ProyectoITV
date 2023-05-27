@@ -23,6 +23,8 @@ module graciamisasimon.proyectoitv {
 
     // Koin
     requires koin.core.jvm;
+    requires org.mybatis;
+    requires java.rmi;
 
     // Abrimos y exponemos el paquete a JavaFX
     opens graciamisasimon.proyectoitv to javafx.fxml;

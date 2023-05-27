@@ -40,3 +40,15 @@ fun CitaDto.toCita():Cita {
     )
  return Cita(localTrabajador,localVehiculo, LocalDate.parse(fechaCita),horaCita)
 }
+
+fun List<Cita>.toDto():List<CitaDto>{
+    var salida = mutableListOf<CitaDto>()
+    this.forEach { salida+=it.toCitaDto() }
+    return salida
+}
+
+fun List<CitaDto>.toCita():List<Cita>{
+    var salida = mutableListOf<Cita>()
+    this.forEach { salida+=it.toCita() }
+    return salida
+}

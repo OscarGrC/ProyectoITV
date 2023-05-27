@@ -16,7 +16,7 @@ class AppConfig {
 
     // Al hacerlo con Lazy solo cargo la configuración a medida que se necesite
     val imagesDirectory by lazy {
-        val path = readProperty("app.images") ?: "imagenes"
+        val path = readProperty("app.imagenes") ?: "imagenes"
         "$APP_PATH${File.separator}$path/"
     }
 
