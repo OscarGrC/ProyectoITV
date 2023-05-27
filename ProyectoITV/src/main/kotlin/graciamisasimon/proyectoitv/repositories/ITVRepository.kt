@@ -18,6 +18,8 @@ interface ITVRepository {
         fun deleteAllClientes()
         fun saveAllClientes(clientes: List<Cliente>): List<Cliente>
         fun saveAllVehiculos(vehiculos: List<Vehiculo>): List<Vehiculo>
+
+        fun saveAllCitas(citas:List<Cita>):List<Cita>
         fun createCita(cita:Cita):Cita
         fun deleteCita(cita: Cita):Cita
         fun upDateCita(cita: Cita):Cita

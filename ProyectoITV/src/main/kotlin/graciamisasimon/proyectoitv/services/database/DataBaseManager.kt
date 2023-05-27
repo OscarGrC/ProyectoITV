@@ -1,5 +1,8 @@
 package graciamisasimon.proyectoitv.services.database
 
+import graciamisasimon.proyectoitv.config.AppConfig
+import graciamisasimon.proyectoitv.models.Cliente
+import graciamisasimon.proyectoitv.models.Vehiculo
 import mu.KotlinLogging
 import org.apache.ibatis.jdbc.ScriptRunner
 import java.io.*
@@ -7,12 +10,15 @@ import java.nio.file.Files
 import java.nio.file.Paths
 import java.sql.*
 import java.util.*
+import java.util.Date
 
 
 private val logger = KotlinLogging.logger {}
 
 
-class DataBaseManager : Closeable {
+class DataBaseManager(
+    private val appConfig: AppConfig
+) : Closeable {
     // Parámetros de conexión
     private lateinit var serverUrl: String
     private lateinit var serverPort: String
@@ -27,6 +33,8 @@ class DataBaseManager : Closeable {
     private var connection: Connection? = null
     private var preparedStatement: PreparedStatement? = null
 
+    val db
+        get() = DriverManager.getConnection(appConfig.databaseUrl)
 
     init {
         logger.debug { "Inicializando el gestor de Bases de Datos" }
@@ -290,11 +298,95 @@ class DataBaseManager : Closeable {
         logger.debug { "Iniciando datos del fichero: $sqlFile y logWriter: $logWriter" }
         this.open()
         check(Files.exists(Paths.get(sqlFile))) { "El fichero $sqlFile no existe" }
-        val sr =   ScriptRunner(connection)
+        val sr = ScriptRunner(connection)
         val reader: Reader = BufferedReader(FileReader(sqlFile))
         sr.setLogWriter(if (logWriter) PrintWriter(System.out) else null)
         sr.runScript(reader)
     }
-    fun insertClientes()
 
+    fun insertCliente(cliente : Cliente) {
+        logger.debug { "Guardando un cliente en la base de datos" }
+
+        val sql = """
+            INSERT INTO cliente VALUES (?,?,?,?,?)
+        """.trimIndent()
+
+        db.use {
+            it.prepareStatement(sql).use { stm ->
+                stm.setCharacterStream(1, cliente.dni.reader())
+                stm.setCharacterStream(2, cliente.nombre.reader())
+                stm.setCharacterStream(3, cliente.apellidos.reader())
+                stm.setInt(4, cliente.telefonoCliente)
+                stm.setCharacterStream(5, cliente.correoCliente.reader())
+
+                stm.executeUpdate()
+            }
+        }
+    }
+
+
+    fun upadateCliente(cliente : Cliente) {
+        logger.debug { "Actualizando un cliente en la base de datos" }
+
+        val sql = """
+            UPDATE cliente VALUES SET cliente_nombre =?, cliente_apellido =?, cliente_telefono =?,cliente_correo =? WHERE cliente_dni =?
+        """.trimIndent()
+
+        db.use {
+            it.prepareStatement(sql).use { stm ->
+                stm.setCharacterStream(1, cliente.nombre.reader())
+                stm.setCharacterStream(2, cliente.apellidos.reader())
+                stm.setInt(3, cliente.telefonoCliente)
+                stm.setCharacterStream(4, cliente.correoCliente.reader())
+                stm.setCharacterStream(5, cliente.dni.reader())
+                stm.executeUpdate()
+            }
+        }
+    }
+
+    fun insertVehiculos(vehiculo: Vehiculo) {
+        logger.debug { "Guardando un vehículo en la base de datos" }
+
+        val sql = """
+            INSERT INTO vehiculo VALUES (?,?,?,?,?,?,?,?,?)
+        """.trimIndent()
+
+        db.use {
+            it.prepareStatement(sql).use { stm ->
+                stm.setCharacterStream(1, vehiculo.matricula.reader())
+                stm.setCharacterStream(2, vehiculo.propietario.dni.reader())
+                stm.setCharacterStream(3, vehiculo.marca.reader())
+                stm.setCharacterStream(4, vehiculo.modelo.reader())
+                stm.setCharacterStream(5, vehiculo.tipoVehiculo.name.reader())
+                stm.setCharacterStream(6, vehiculo.tipoMotor.name.reader())
+                stm.setDate(7, java.sql.Date.valueOf(vehiculo.fechaMatriculacion))
+                stm.setDate(8, java.sql.Date.valueOf(vehiculo.fechaUlimaRevision))
+
+                stm.executeUpdate()
+            }
+        }
+    }
+
+    fun updateVehiculo(vehiculo: Vehiculo) {
+        logger.debug { "Actualizando un vehículo en la base de datos" }
+
+        val sql = """
+            UPDATE vehiculo VALUES SET cliente_dni =?, vehiculo_marca =?, vehiculo_modelo =?, vehiculo_tipo =?, vehiculo_tipo_motor =?, vehiculo_fecha_matriculacion =?, vehiculo_fecha_ult_version =? WHERE cliente_dni =?
+        """.trimIndent()
+
+        db.use {
+            it.prepareStatement(sql).use { stm ->
+                stm.setCharacterStream(1, vehiculo.propietario.dni.reader())
+                stm.setCharacterStream(2, vehiculo.marca.reader())
+                stm.setCharacterStream(3, vehiculo.modelo.reader())
+                stm.setCharacterStream(4, vehiculo.tipoVehiculo.name.reader())
+                stm.setCharacterStream(5, vehiculo.tipoMotor.name.reader())
+                stm.setDate(6, java.sql.Date.valueOf(vehiculo.fechaMatriculacion))
+                stm.setDate(7, java.sql.Date.valueOf(vehiculo.fechaUlimaRevision))
+                stm.setCharacterStream(8, vehiculo.matricula.reader())
+
+                stm.executeUpdate()
+            }
+        }
+    }
 }

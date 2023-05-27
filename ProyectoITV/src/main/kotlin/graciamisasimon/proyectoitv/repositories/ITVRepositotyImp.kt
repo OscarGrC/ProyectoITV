@@ -15,13 +15,7 @@ class ITVRepositotyImp(private val dataBaseClient:DataBaseManager ):ITVRepositor
         logger.debug { "createCliente: $cliente" }
         // Insertamos, transacción por funcion de sqlite (mira el .sq)
         database.transaction {
-            database.insertClientes(
-                dni = cliente.dni,
-                nombre = cliente.nombre,
-                apellidos = cliente.apellidos,
-                correo = cliente.correoCliente,
-                telefono = cliente.telefonoCliente
-            )
+            database.insertCliente(cliente)
         }
         return cliente
     }
@@ -31,47 +25,20 @@ class ITVRepositotyImp(private val dataBaseClient:DataBaseManager ):ITVRepositor
         //añadimos primero cliente
         createCliente(vehiculo.propietario)
         database.transaction {
-            database.insertVehiculos(
-                matricula = vehiculo.matricula,
-                marca = vehiculo.marca,
-                modelo = vehiculo.modelo,
-                tipoVehiculo = vehiculo.tipoVehiculo.name,
-                tipoMotor = vehiculo.tipoMotor.name,
-                fechaUltimaRevision = vehiculo.fechaUlimaRevision.toString(),
-                fechaMatriculacion = vehiculo.fechaMatriculacion.toString(),
-                propietario = vehiculo.propietario.dni,
-                imagen = vehiculo.imagen
-            )
+            database.insertVehiculos(vehiculo)
         }
         return vehiculo
     }
 
     private fun updateCliente(cliente: Cliente): Cliente {
         logger.debug { "updateCliente: $cliente" }
-        database.updateClientes(
-            dni = cliente.dni,
-            nombre = cliente.nombre,
-            apellidos = cliente.apellidos,
-            email = cliente.correoCliente,
-            telefono = cliente.telefonoCliente
-        )
+        database.upadateCliente(cliente)
         return cliente
     }
     private fun updateVehiculo(vehiculo: Vehiculo): Vehiculo {
         logger.debug { "updateVehiculo: $vehiculo" }
         //modifico aqui salvamos propietario vehiculo
-        updateCliente(vehiculo.propietario)
-        database.update(
-            matricula = vehiculo.matricula,
-            marca = vehiculo.marca,
-            modelo = vehiculo.modelo,
-            tipoVehiculo = vehiculo.tipoVehiculo.name,
-            tipoMotor = vehiculo.tipoMotor.name,
-            fechaUltimaRevision = vehiculo.fechaUlimaRevision.toString(),
-            fechaMatriculacion = vehiculo.fechaMatriculacion.toString(),
-            propietario = vehiculo.propietario.dni,
-            imagen = vehiculo.imagen
-        )
+        database.updateVehiculo(vehiculo)
         return vehiculo
     }
 

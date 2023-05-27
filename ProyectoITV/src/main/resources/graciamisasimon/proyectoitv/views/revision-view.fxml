@@ -209,6 +209,16 @@
                               </VBox>
                               <VBox alignment="CENTER_RIGHT" prefHeight="104.0" prefWidth="272.0">
                                  <children>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Label alignment="CENTER_RIGHT" prefHeight="28.0" prefWidth="143.0" text="APELLIDOS">
+                                             <padding>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </padding>
+                                          </Label>
+                                          <TextField fx:id="textClienteApellidos" />
+                                       </children>
+                                    </HBox>
                                     <HBox fx:id="textDni" prefHeight="100.0" prefWidth="200.0">
                                        <children>
                                           <Label alignment="CENTER_RIGHT" prefHeight="28.0" prefWidth="182.0" text="DNI">

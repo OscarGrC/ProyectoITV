@@ -6,7 +6,6 @@ module graciamisasimon.proyectoitv {
 
     // Logger
     requires io.github.microutils.kotlinlogging;
-    requires koin.logger.slf4j;
     requires org.slf4j;
 
     // Gson
@@ -17,14 +16,16 @@ module graciamisasimon.proyectoitv {
 
     // SqlDeLight
     requires runtime.jvm;
-    requires sqlite.driver;
+
     // Como no pongas esto te vas a volver loco con los errores
     requires java.sql;
+
+    //MariaDB
+    requires org.mariadb.jdbc;
 
     // Koin
     requires koin.core.jvm;
     requires org.mybatis;
-    requires java.rmi;
 
     // Abrimos y exponemos el paquete a JavaFX
     opens graciamisasimon.proyectoitv to javafx.fxml;
@@ -35,8 +36,8 @@ module graciamisasimon.proyectoitv {
     exports graciamisasimon.proyectoitv.controllers;
 
     // Rutas
-//    gcd gitopens graciamisasimon.proyectoitv.routes to javafx.fxml;
-//    exports graciamisasimon.proyectoitv.routes;
+    opens graciamisasimon.proyectoitv.routes to javafx.fxml;
+    exports graciamisasimon.proyectoitv.routes;
 
     // dtos, abrimos a Gson
     opens graciamisasimon.proyectoitv.dto.json to com.google.gson;
@@ -44,5 +45,6 @@ module graciamisasimon.proyectoitv {
     // Modelos a javafx para poder usarlos en las vistas
     opens graciamisasimon.proyectoitv.models to javafx.fxml;
     exports graciamisasimon.proyectoitv.models;
+
 
 }

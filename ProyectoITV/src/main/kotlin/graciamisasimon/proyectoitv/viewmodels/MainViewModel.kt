@@ -1,7 +1,7 @@
 package graciamisasimon.proyectoitv.viewmodels
 
-import com.github.michaelbull.result.Ok
-import com.github.michaelbull.result.Result
+import com.github.michaelbull.result.*
+import graciamisasimon.proyectoitv.errors.VehiculosError
 import graciamisasimon.proyectoitv.models.Cita
 import graciamisasimon.proyectoitv.models.Vehiculo
 import graciamisasimon.proyectoitv.repositories.ITVRepository
@@ -47,27 +47,25 @@ class MainViewModel(
     }
 
     // Actualiza el estado de la aplicación con los datos de ese instante en el estado
-    private fun updateState(listaAlumnos: List<Vehiculo>) {
+    private fun updateState(listaCitas: List<Cita>) {
         logger.debug { "Actualizando estado de Aplicacion" }
 
         val vehiculoSeleccionado =MainFormulario()
 
         state.value = state.value.copy(
-            alumnos = listaAlumnos.sortedBy { it.apellidos }, // Ordenamos por apellidos
-            numAprobados = numAprobados,
-            notaMedia = notaMedia,
+            vehiculos = listaCitas.sortedBy { it.fechaCita }, // Ordenamos por apellidos
             alumnoSeleccionado = vehiculoSeleccionado
         )
     }
 
     // Filtra la lista de alumnnos en el estado en función del tipo y el nombre completo
-    fun alumnosFilteredList(tipo: String, nombreCompleto: String): List<Alumno> {
-        logger.debug { "Filtrando lista de Alumnos: $tipo, $nombreCompleto" }
+    fun VehiculosFilteredList(tipo: String, nombreCompleto: String): List<Vehiculo> {
+        logger.debug { "Filtrando lista de Vehiculos: $tipo, $nombreCompleto" }
 
-        return state.value.alumnos
-            .filter { alumno ->
+        return state.value.vehiculos
+            .filter { vehiculo ->
                 when (tipo) {
-                    TipoFiltro.SI.value -> alumno.repetidor
+                    TipoFiltro .SI.value -> alumno.repetidor
                     TipoFiltro.NO.value -> !alumno.repetidor
                     else -> true
                 }
@@ -77,77 +75,75 @@ class MainViewModel(
 
     }
 
-    fun saveAlumnadoToJson(file: File): Result<Long, AlumnoError> {
+    fun saveCitasToJson(file: File): Result<Long,VehiculosError> {
         logger.debug { "Guardando Alumnado en JSON" }
-        return storage.storeDataJson(file, state.value.alumnos)
+        return storage.storeDataJsonCita(file, state.value.citas)
     }
 
-    fun loadAlumnadoFromJson(file: File, withImages: Boolean = false): Result<List<Alumno>, AlumnoError> {
+    fun loadCitasFromJson(file: File, withImages: Boolean = false): Result<List<Cita>, VehiculosError> {
         logger.debug { "Cargando Alumnado en JSON" }
         // Borramos todas las imagenes e iniciamos el proceso
         return storage.deleteAllImages().andThen {
-            storage.loadDataJson(file).onSuccess {
-                repository.deleteAll() // Borramos todos los datos de la BD
+            storage.loadDataJsonCita(file).onSuccess {
+                repository.deleteAllCita() // Borramos todos los datos de la BD
                 // Guardamos los nuevos, pero hay que quitarle el ID, porque trabajamos con el NEW!!
-                repository.saveAll(
-                    if (withImages)
-                        it
-                    else
-                        it.map { a -> a.copy(id = Alumno.NEW_ALUMNO, imagen = TipoImagen.SIN_IMAGEN.value) }
-                )
-                loadAlumnosFromRepository() // Actualizamos la lista
+                repository.saveAllCitas(it)
+                loadCitasFromRepository() // Actualizamos la lista
             }
         }
     }
 
     // carga en el estado el alumno seleccionado
-    fun updateAlumnoSeleccionado(alumno: Alumno) {
-        logger.debug { "Actualizando estado de Alumno: $alumno" }
+    fun updateVehiculoSeleccionado(vehiculo: Vehiculo) {
+        logger.debug { "Actualizando estado de vehiculo: $vehiculo" }
 
         lateinit var fileImage: File
         lateinit var imagen: Image
 
-        storage.loadImage(alumno.imagen).onSuccess {
+        storage.loadImage(vehiculo.imagen).onSuccess {
             imagen = Image(it.absoluteFile.toURI().toString())
             fileImage = it
         }.onFailure {
-            imagen = Image(RoutesManager.getResourceAsStream(SIN_IMAGEN))
-            fileImage = File(RoutesManager.getResource(SIN_IMAGEN).toURI())
+            imagen = Image(RoutesManager.getResourceAsStream("images/notFound.png"))
+            fileImage = File(RoutesManager.getResource("images/notFound.png").toURI())
         }
 
-        val alumnoSeleccionado = AlumnoFormulario(
-            numero = alumno.id,
-            apellidos = alumno.apellidos,
-            nombre = alumno.nombre,
-            email = alumno.email,
-            fechaNacimiento = alumno.fechaNacimiento,
-            calificacion = alumno.calificacion,
-            repetidor = alumno.repetidor,
-            fileImage = fileImage,
-            imagen = imagen
+        val vehiculoSeleccionado = MainFormulario(
+          matricula  = vehiculo.matricula,
+          marca = vehiculo.marca,
+          modelo = vehiculo.modelo,
+          fechaMatriculacion = vehiculo.fechaMatriculacion,
+          tipoVehiculo  = vehiculo.tipoVehiculo.name,
+          tipoMotor  = vehiculo.tipoMotor.name,
+          clienteNombre  = vehiculo.propietario.nombre,
+          clienteCorreo  = vehiculo.propietario.correoCliente,
+          clienteDNI  = vehiculo.propietario.dni,
+          clienteTelefono  = vehiculo.propietario.telefonoCliente.toString(),
+          fileImage = fileImage,
+          imagen = imagen
         )
 
-        state.value = state.value.copy(alumnoSeleccionado = alumnoSeleccionado)
+        state.value = state.value.copy(vehiculoTablaSeleccionado = vehiculoSeleccionado)
     }
 
 
-    // Crea un nuevo alumno en el estado y repositorio
-    fun crearAlumno(alumnoNuevo: AlumnoFormulario): Result<Alumno, AlumnoError> {
-        logger.debug { "Creando Alumno" }
-        // creamos el alumno
-        println("Alumno a crear: $alumnoNuevo")
-        var newAlumno = alumnoNuevo.toModel().copy(id = Alumno.NEW_ALUMNO)
-        return newAlumno.validate()
+    // Crea un nueva cita en el estado y repositorio
+    fun crearCita(citaNueva: MainFormulario): Result<Cita, VehiculosError> {
+        logger.debug { "Creando Cita" }
+        // creamos la cita
+        println("cita a crear: $citaNueva")
+        var newCita = citaNueva.toModel().copy(id = Alumno.NEW_ALUMNO)
+        return newCita.validate()
             .andThen {
                 // Copiamos la imagen si no es nula
-                println("Imagen a copiar: ${alumnoNuevo.fileImage}")
-                alumnoNuevo.fileImage?.let { newFileImage ->
+                println("Imagen a copiar: ${citaNueva.fileImage}")
+                citaNueva.fileImage?.let { newFileImage ->
                     storage.saveImage(newFileImage).onSuccess {
                         kotlin.io.println("Imagen copiada: ${it.name}")
-                        newAlumno = newAlumno.copy(imagen = it.name)
+                        newCita = newCita.copy(imagen = it.name)
                     }
                 }
-                val new = repository.save(newAlumno)
+                val new = repository.save(newCita)
                 // Actualizamos la lista
                 // Podriamos cargar del repositorio otra vez, si fuera concurente o
                 // conectada a un servidor remoto debería hacerlo así
@@ -190,43 +186,25 @@ class MainViewModel(
     }
 
     // Elimina un alumno en el estado y repositorio
-    fun eliminarAlumno(): Result<Unit, AlumnoError> {
-        logger.debug { "Eliminando Alumno" }
+    fun eliminarCita(): Result<Unit, VehiculosError> {
+        logger.debug { "Eliminando Cita" }
         // Hay que eliminar su imagen, primero siempre una copia!!!
-        val alumno = state.value.alumnoSeleccionado.copy()
+        val cita = state.value.vehiculoTablaSeleccionado.copy()
         // Para evitar que cambien en la selección!!!
 
-        alumno.fileImage?.let {
-            if (it.name != TipoImagen.SIN_IMAGEN.value) {
+        cita.fileImage?.let {
+            if (it.name != "images/notFound.png") {
                 storage.deleteImage(it)
             }
         }
 
         // Borramos del repositorio
-        repository.deleteById(alumno.numero)
+        repository.deleteCita(cita.toCita())
         // Actualizamos la lista
         // Podriamos cargar del repositorio otra vez, si fuera concurente o
         // conectada a un servidor remoto debería hacerlo así
-        updateState(state.value.alumnos.filter { it.id != alumno.numero })
+        updateState(state.value.citas.filter { it != cita.toCita() })
         return Ok(Unit)
-    }
-
-    fun exportToZip(fileToZip: File): Result<Unit, AlumnoError> {
-        logger.debug { "Exportando a ZIP: $fileToZip" }
-        // recogemos los alumnos del repositorio
-        val alumnos = repository.findAll()
-        storage.exportToZip(fileToZip, alumnos)
-        return Ok(Unit)
-    }
-
-    fun loadAlumnadoFromZip(fileToUnzip: File): Result<List<Alumno>, AlumnoError> {
-        logger.debug { "Importando de ZIP: $fileToUnzip" }
-        // recogemos los alumnos del repositorio
-        return storage.loadFromZip(fileToUnzip).onSuccess { it ->
-            repository.deleteAll()
-            repository.saveAll(it.map { a -> a.copy(id = Alumno.NEW_ALUMNO) })
-            loadCitasFromRepository()
-        }
     }
 
     fun setTipoOperacion(tipo: TipoOperacion) {
@@ -245,8 +223,7 @@ class MainViewModel(
         val typesTipo: List<String> = listOf(),
         val typesMotor: List<String> = listOf(),
         val typesMarca: List<String> = listOf(),
-        val listaCombo: List<String> = listOf(" ","TipoVehiculo",("TipoMotor"),("DNI"),)
-
+        val listaCombo: List<String> = listOf(" ","TipoVehiculo","TipoMotor","DNI"),
         val vehiculos: List<Vehiculo> = listOf(),
         val citas: List<Cita> = listOf(),
 
@@ -261,9 +238,7 @@ class MainViewModel(
     enum class TipoOperacion(val value: String) {
         NUEVO("Nuevo"), EDITAR("Editar")
     }
-    enum class TipoImagen(val value: String) {
-        NOT_FOUND("images/notFound.png"), EMPTY("")
-    }
+
     // Estado para formularios de Alumno (seleccionado y de operaciones)
     data class MainFormulario(
         val matricula: String = "",
@@ -274,6 +249,7 @@ class MainViewModel(
         val tipoMotor: String = "",
         val clienteNombre:String = "",
         val clienteCorreo:String = "",
+        val clienteApellidos:String = "",
         val clienteDNI:String = "",
         val clienteTelefono:String = "",
         val imagen: Image = Image(RoutesManager.getResourceAsStream("images/notFound")),

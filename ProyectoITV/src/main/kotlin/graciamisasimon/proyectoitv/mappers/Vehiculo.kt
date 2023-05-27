@@ -10,14 +10,15 @@ import java.time.LocalDate
 fun Vehiculo.toDto():VehiculoDto{
     return VehiculoDto(
         matricula,marca,modelo,tipoVehiculo.name,tipoMotor.name,fechaMatriculacion.toString(),
-        fechaUlimaRevision.toString(),propietario.nombre,propietario.apellidos,propietario.telefonoCliente,propietario.correoCliente,
+        fechaUlimaRevision.toString(),propietario.nombre,propietario.apellidos,propietario.telefonoCliente.toString()
+        ,propietario.correoCliente,
         propietario.dni)
 }
 
 fun VehiculoDto.toVehiculo():Vehiculo{
     return Vehiculo(matricula,marca,modelo,TipoVehiculo.valueOf(tipoVehiculo),TipoMotor.valueOf(tipoMotor),
         LocalDate.parse(fechaMatriculacion),LocalDate.parse(fechaUlimaRevision),
-        Cliente(nombreCliente, apellidos, telefonoCliente, correoCliente, dni))
+        Cliente(dni,nombreCliente,apellidos,telefonoCliente.toInt(),correoCliente))
 }
 
 fun List<Vehiculo>.toDto():List<VehiculoDto>{
