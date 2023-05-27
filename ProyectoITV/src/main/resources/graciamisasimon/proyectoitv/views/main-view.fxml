@@ -45,42 +45,66 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="713.0" prefWidth="586.0">
                <children>
-                  <VBox layoutX="-1.0" layoutY="-2.0" prefHeight="675.0" prefWidth="589.0" />
-                  <HBox alignment="CENTER" layoutX="-1.0" layoutY="-6.0" prefHeight="54.0" prefWidth="532.0">
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" top="5.0" />
-                     </padding>
+                  <VBox layoutX="-1.0" layoutY="-2.0" prefHeight="675.0" prefWidth="589.0">
                      <children>
-                        <Label prefHeight="18.0" prefWidth="59.0" text="Buscar:">
-                           <HBox.margin>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="54.0" prefWidth="532.0">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" top="5.0" />
+                           </padding>
+                           <children>
+                              <Label prefHeight="18.0" prefWidth="116.0" text="Selecciona Estacion:">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <ComboBox fx:id="comboEstacion" prefHeight="25.0" prefWidth="124.0" />
+                           </children>
+                           <opaqueInsets>
                               <Insets right="10.0" />
-                           </HBox.margin>
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                        <TextField fx:id="textBuscador" prefHeight="26.0" prefWidth="276.0">
-                           <HBox.margin>
-                              <Insets right="10.0" />
-                           </HBox.margin>
-                        </TextField>
-                        <ComboBox fx:id="comboTipo" prefHeight="26.0" prefWidth="189.0" />
-                     </children>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </HBox>
-                  <TableView fx:id="tableVehiculos" layoutX="-1.0" layoutY="47.0" prefHeight="663.0" prefWidth="589.0">
-                     <columns>
-                        <TableColumn fx:id="tablaColumnaMatricula" editable="false" prefWidth="108.0" text="Matricula" />
-                        <TableColumn fx:id="tableColumnaMarca" editable="false" prefWidth="68.0" text="Marca" />
-                        <TableColumn fx:id="tableColumnaModelo" editable="false" minWidth="0.0" prefWidth="73.0" text="Modelo" />
-                        <TableColumn fx:id="tableColumnaTipoMotor" editable="false" prefWidth="79.0" text="TipoMotor" />
-                        <TableColumn fx:id="tablaColumnaTipoVehiculo" editable="false" prefWidth="76.0" text="TipoVeh" />
-                        <TableColumn fx:id="tablaColumnaLastRevision" editable="false" prefWidth="95.0" text="LastRev." />
-                        <TableColumn fx:id="tablaColumaDNI" prefWidth="89.0" text="DniCliente" />
-                     </columns>
-                  </TableView>
+                           </opaqueInsets>
+                           <VBox.margin>
+                              <Insets right="20.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="54.0" prefWidth="532.0">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" top="5.0" />
+                           </padding>
+                           <children>
+                              <Label prefHeight="18.0" prefWidth="59.0" text="Buscar:">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="textBuscador" prefHeight="26.0" prefWidth="276.0">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </TextField>
+                              <ComboBox fx:id="comboTipo" prefHeight="26.0" prefWidth="189.0" />
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </HBox>
+                        <TableView fx:id="tableVehiculos" prefHeight="663.0" prefWidth="589.0">
+                           <columns>
+                              <TableColumn fx:id="tablaColumnaMatricula" editable="false" prefWidth="108.0" text="Matricula" />
+                              <TableColumn fx:id="tableColumnaMarca" editable="false" prefWidth="68.0" text="Marca" />
+                              <TableColumn fx:id="tableColumnaModelo" editable="false" minWidth="0.0" prefWidth="73.0" text="Modelo" />
+                              <TableColumn fx:id="tableColumnaTipoMotor" editable="false" prefWidth="79.0" text="TipoMotor" />
+                              <TableColumn fx:id="tablaColumnaTipoVehiculo" editable="false" prefWidth="76.0" text="TipoVeh" />
+                              <TableColumn fx:id="tablaColumnaLastRevision" editable="false" prefWidth="95.0" text="LastRev." />
+                              <TableColumn fx:id="tablaColumaDNI" prefWidth="89.0" text="DniCliente" />
+                           </columns>
+                        </TableView>
+                     </children></VBox>
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="697.0" prefWidth="420.0">

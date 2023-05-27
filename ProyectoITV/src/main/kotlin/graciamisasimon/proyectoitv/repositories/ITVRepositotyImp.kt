@@ -21,13 +21,7 @@ class ITVRepositotyImp(private val dataBaseClient:DataBaseManager ):ITVRepositor
     }
     private fun createVehiculo(vehiculo: Vehiculo): Vehiculo {
         logger.debug { "createVehiculo: $vehiculo" }
-        // Insertamos, transacción por funcion de sqlite (mira el .sq)
-        //añadimos primero cliente
-        createCliente(vehiculo.propietario)
-        database.transaction {
-            database.insertVehiculos(vehiculo)
-        }
-        return vehiculo
+      TODO()
     }
 
     private fun updateCliente(cliente: Cliente): Cliente {
@@ -44,29 +38,29 @@ class ITVRepositotyImp(private val dataBaseClient:DataBaseManager ):ITVRepositor
 
     override fun findAllVehiculos(): List<Vehiculo> {
         logger.debug { "findAllVehiculos" }
-        return database.selectAllVehiculos()
+        TODO()
     }
 
 
     override fun findAllClientes(): List<Cliente> {
         logger.debug { "findAllClientes" }
-        return database.selectAllClientes()
+       TODO()
     }
 
     override fun findClientesByDNI(dni: String): Cliente? {
         logger.debug { "findClientesByDNI: $dni" }
-
-        return database.selectClientesByDNI(dni).executeAsOneOrNull()?.toModel()
+        database.findClientesByDni(dni)
+        TODO()
     }
 
     override fun findVehiculoByMatricula(matricula: String): Vehiculo? {
         logger.debug { "findVehiculoByMatricula: $matricula" }
-        return database.selectVehiculosByMatricula(matricula).executeAsOneOrNull()?.toModel()
+       TODO()
     }
 
     override fun findVehiculoByPropietario(dni: String): List<Vehiculo> {
         logger.debug { "findVehiculoByPropietario $dni" }
-        return database.selectVehiculosByPropietario(dni)
+        TODO()
     }
 
     override fun saveCliente(cliente: Cliente): Cliente {
@@ -90,22 +84,22 @@ class ITVRepositotyImp(private val dataBaseClient:DataBaseManager ):ITVRepositor
 
     override fun deleteClienteByDNI(dni: String) {
         logger.debug { "deleteClienteByDNI: $dni" }
-        return database.deleteClientes(dni)
+       TODO()
     }
 
     override fun deleteVehiculoByMatricula(matricula: String) {
         logger.debug { "deleteVehiculoByMatricula: $matricula" }
-        return database.deleteVehiculo(matricula)
+        TODO()
     }
 
     override fun deleteAllVehiculos() {
         logger.debug { "deleteAllVehiculos" }
-        return database.deleteAllVehiculos()
+        TODO()
     }
 
     override fun deleteAllClientes() {
         logger.debug { "deleteAllClientes" }
-        return database.deleteAllClientes()
+        TODO()
     }
 
     override fun saveAllClientes(clientes: List<Cliente>): List<Cliente> {
@@ -117,6 +111,11 @@ class ITVRepositotyImp(private val dataBaseClient:DataBaseManager ):ITVRepositor
         logger.debug { "saveAllVehiculos: $vehiculos" }
         return vehiculos.map { saveVehiculo(it) }
     }
+
+    override fun saveAllCitas(citas: List<Cita>): List<Cita> {
+        TODO("Not yet implemented")
+    }
+
     override fun createCita(cita: Cita): Cita {
         TODO("Not yet implemented")
     }
@@ -137,11 +136,11 @@ class ITVRepositotyImp(private val dataBaseClient:DataBaseManager ):ITVRepositor
         TODO("Not yet implemented")
     }
 
-    override fun createInformeCita(cita: Cita): InformeITV {
+    override fun createInformeCita(cita: Cita) {
         TODO("Not yet implemented")
     }
 
-    override fun deleteInformeCita(cita: Cita): InformeITV {
+    override fun deleteInformeCita(cita: Cita)  {
         TODO("Not yet implemented")
     }
 }

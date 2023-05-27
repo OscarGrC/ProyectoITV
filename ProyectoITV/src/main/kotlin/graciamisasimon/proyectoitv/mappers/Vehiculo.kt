@@ -10,9 +10,9 @@ import java.time.LocalDate
 fun Vehiculo.toDto():VehiculoDto{
     return VehiculoDto(
         matricula,marca,modelo,tipoVehiculo.name,tipoMotor.name,fechaMatriculacion.toString(),
-        fechaUlimaRevision.toString(),propietario.nombre,propietario.apellidos,propietario.telefonoCliente.toString()
-        ,propietario.correoCliente,
-        propietario.dni)
+        fechaUlimaRevision.toString(),propietarioDni.nombre,propietarioDni.apellidos,propietarioDni.telefonoCliente.toString()
+        ,propietarioDni.correoCliente,
+        propietarioDni.dni)
 }
 
 fun VehiculoDto.toVehiculo():Vehiculo{

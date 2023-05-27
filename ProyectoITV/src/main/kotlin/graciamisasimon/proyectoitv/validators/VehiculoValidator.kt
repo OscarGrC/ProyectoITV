@@ -23,7 +23,7 @@ fun Vehiculo.validate(): Result<Vehiculo, VehiculosError> {
     if ((this.fechaUlimaRevision != null) && (this.fechaUlimaRevision < fechaMatriculacion)) {
         return Err(VehiculosError.ValidationProblem("La revision no puede ser anterior a la matriculacion"))
     }
-    propietario.validate()
+    propietarioDni.validate()
 
     return Ok(this)
 }

@@ -3,6 +3,8 @@ package graciamisasimon.proyectoitv.services.database
 import graciamisasimon.proyectoitv.config.AppConfig
 import graciamisasimon.proyectoitv.models.Cliente
 import graciamisasimon.proyectoitv.models.Vehiculo
+import graciamisasimon.proyectoitv.models.enums.TipoMotor
+import graciamisasimon.proyectoitv.models.enums.TipoVehiculo
 import mu.KotlinLogging
 import org.apache.ibatis.jdbc.ScriptRunner
 import java.io.*
@@ -10,7 +12,6 @@ import java.nio.file.Files
 import java.nio.file.Paths
 import java.sql.*
 import java.util.*
-import java.util.Date
 
 
 private val logger = KotlinLogging.logger {}
@@ -304,6 +305,15 @@ class DataBaseManager(
         sr.runScript(reader)
     }
 
+
+    /**
+     * Realiza una consulta INSERT a la base de datos insertando los clientes
+     *
+     * @param insertCliente consulta SQL de tipo insert
+     * @param params cliente a insertar
+     * @return ResultSet de la consulta
+     * @throws SQLException No se ha podido realizar la consulta o la tabla no existe
+     */
     fun insertCliente(cliente : Cliente) {
         logger.debug { "Guardando un cliente en la base de datos" }
 
@@ -371,7 +381,7 @@ class DataBaseManager(
         logger.debug { "Actualizando un vehículo en la base de datos" }
 
         val sql = """
-            UPDATE vehiculo VALUES SET cliente_dni =?, vehiculo_marca =?, vehiculo_modelo =?, vehiculo_tipo =?, vehiculo_tipo_motor =?, vehiculo_fecha_matriculacion =?, vehiculo_fecha_ult_version =? WHERE cliente_dni =?
+            UPDATE vehiculo VALUES SET cliente_dni =?, vehiculo_marca =?, vehiculo_modelo =?, vehiculo_tipo =?, vehiculo_tipo_motor =?, vehiculo_fecha_matriculacion =?, vehiculo_fecha_ult_version =? WHERE matricula =?
         """.trimIndent()
 
         db.use {
@@ -388,5 +398,58 @@ class DataBaseManager(
                 stm.executeUpdate()
             }
         }
+    }
+
+    fun selectAllVehiculos() {
+        val sql = "SELECT * FROM vehiculo"
+
+        val vehiculos = mutableListOf<Vehiculo>()
+
+        db.use {
+            it.prepareStatement(sql).use { stm ->
+                val rs = stm.executeQuery()
+                while (rs.next()) {
+                    vehiculos.add(
+                        Vehiculo(
+                            matricula = rs.getCharacterStream("matricula").toString(),
+                            marca = rs.getCharacterStream("vehiculo_marca").toString(),
+                            modelo = rs.getCharacterStream("vehiculo_modelo").toString(),
+                            tipoVehiculo = TipoVehiculo.valueOf(rs.getCharacterStream("vehiculo_tipo").toString()),
+                            tipoMotor = TipoMotor.valueOf(rs.getCharacterStream("vehiculo_tipo_motor").toString()),
+                            fechaMatriculacion = rs.getDate("vehiculo_fecha_matriculacion").toLocalDate(),
+                            fechaUlimaRevision = rs.getDate("vehiculo_fecha_ult_version").toLocalDate(),
+                            propietario = findClientesByDni(rs.getCharacterStream("cliente_dni").toString())
+                        )
+                    )
+                }
+            }
+        }
+    }
+
+    fun findClientesByDni(dni: String): Cliente {
+
+        var item: Cliente? = null
+        val sql = """
+            SELECT * FROM cliente WHERE cliente_dni =?
+        """.trimIndent()
+
+        db.use {
+            it.prepareStatement(sql).use { stm ->
+                stm.setCharacterStream(1, dni.reader())
+                val rs = stm.executeQuery()
+                rs?.let {
+                    while (it.next()) {
+                        item = Cliente(
+                            dni = rs.getCharacterStream("cliente_dni").toString(),
+                            nombre = rs.getCharacterStream("cliente_nombre").toString(),
+                            apellidos = rs.getCharacterStream("cliente_apellido").toString(),
+                            telefonoCliente = rs.getInt("cliente_telefono"),
+                            correoCliente = rs.getCharacterStream("cliente_correo").toString()
+                        )
+                    }
+                }
+            }
+        }
+        return item!!
     }
 }

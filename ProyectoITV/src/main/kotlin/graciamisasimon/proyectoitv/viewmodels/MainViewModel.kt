@@ -49,30 +49,14 @@ class MainViewModel(
     // Actualiza el estado de la aplicación con los datos de ese instante en el estado
     private fun updateState(listaCitas: List<Cita>) {
         logger.debug { "Actualizando estado de Aplicacion" }
-
-        val vehiculoSeleccionado =MainFormulario()
-
-        state.value = state.value.copy(
-            vehiculos = listaCitas.sortedBy { it.fechaCita }, // Ordenamos por apellidos
-            alumnoSeleccionado = vehiculoSeleccionado
-        )
+    TODO()
     }
 
     // Filtra la lista de alumnnos en el estado en función del tipo y el nombre completo
     fun VehiculosFilteredList(tipo: String, nombreCompleto: String): List<Vehiculo> {
         logger.debug { "Filtrando lista de Vehiculos: $tipo, $nombreCompleto" }
 
-        return state.value.vehiculos
-            .filter { vehiculo ->
-                when (tipo) {
-                    TipoFiltro .SI.value -> alumno.repetidor
-                    TipoFiltro.NO.value -> !alumno.repetidor
-                    else -> true
-                }
-            }.filter { alumno ->
-                alumno.nombreCompleto.contains(nombreCompleto, true)
-            }
-
+    TODO()
     }
 
     fun saveCitasToJson(file: File): Result<Long,VehiculosError> {
@@ -95,116 +79,20 @@ class MainViewModel(
 
     // carga en el estado el alumno seleccionado
     fun updateVehiculoSeleccionado(vehiculo: Vehiculo) {
-        logger.debug { "Actualizando estado de vehiculo: $vehiculo" }
-
-        lateinit var fileImage: File
-        lateinit var imagen: Image
-
-        storage.loadImage(vehiculo.imagen).onSuccess {
-            imagen = Image(it.absoluteFile.toURI().toString())
-            fileImage = it
-        }.onFailure {
-            imagen = Image(RoutesManager.getResourceAsStream("images/notFound.png"))
-            fileImage = File(RoutesManager.getResource("images/notFound.png").toURI())
-        }
-
-        val vehiculoSeleccionado = MainFormulario(
-          matricula  = vehiculo.matricula,
-          marca = vehiculo.marca,
-          modelo = vehiculo.modelo,
-          fechaMatriculacion = vehiculo.fechaMatriculacion,
-          tipoVehiculo  = vehiculo.tipoVehiculo.name,
-          tipoMotor  = vehiculo.tipoMotor.name,
-          clienteNombre  = vehiculo.propietario.nombre,
-          clienteCorreo  = vehiculo.propietario.correoCliente,
-          clienteDNI  = vehiculo.propietario.dni,
-          clienteTelefono  = vehiculo.propietario.telefonoCliente.toString(),
-          fileImage = fileImage,
-          imagen = imagen
-        )
-
-        state.value = state.value.copy(vehiculoTablaSeleccionado = vehiculoSeleccionado)
+    TODO()
     }
 
 
     // Crea un nueva cita en el estado y repositorio
     fun crearCita(citaNueva: MainFormulario): Result<Cita, VehiculosError> {
-        logger.debug { "Creando Cita" }
-        // creamos la cita
-        println("cita a crear: $citaNueva")
-        var newCita = citaNueva.toModel().copy(id = Alumno.NEW_ALUMNO)
-        return newCita.validate()
-            .andThen {
-                // Copiamos la imagen si no es nula
-                println("Imagen a copiar: ${citaNueva.fileImage}")
-                citaNueva.fileImage?.let { newFileImage ->
-                    storage.saveImage(newFileImage).onSuccess {
-                        kotlin.io.println("Imagen copiada: ${it.name}")
-                        newCita = newCita.copy(imagen = it.name)
-                    }
-                }
-                val new = repository.save(newCita)
-                // Actualizamos la lista
-                // Podriamos cargar del repositorio otra vez, si fuera concurente o
-                // conectada a un servidor remoto debería hacerlo así
-                updateState(state.value.alumnos + new)
-                Ok(new)
-            }
+        TODO()
     }
 
     // Edita un alumno en el estado y repositorio
-    fun editarAlumno(alumnoEditado: AlumnoFormulario): Result<Alumno, AlumnoError> {
-        logger.debug { "Editando Alumno" }
-        // creamos el alumno
-        val fileImageTemp = state.value.alumnoSeleccionado.fileImage // Nombre de la imagen que tiene
-        var updatedAlumno = alumnoEditado.toModel().copy(imagen = fileImageTemp!!.name)
-        return updatedAlumno.validate()
-            .andThen {
-                // Tenemos dos opciones, que no tuviese imagen o que si la tuviese
-                alumnoEditado.fileImage?.let { newFileImage ->
-                    if (updatedAlumno.imagen == TipoImagen.SIN_IMAGEN.value || updatedAlumno.imagen == TipoImagen.EMPTY.value) {
-                        storage.saveImage(newFileImage).onSuccess {
-                            updatedAlumno = updatedAlumno.copy(imagen = it.name)
-                        }
-                    } else {
-                        storage.updateImage(fileImageTemp, newFileImage)
-                    }
-                }
-                val updated = repository.save(updatedAlumno)
-                // Actualizamos la lista
-                // Podriamos cargar del repositorio otra vez, si fuera concurente o
-                // conectada a un servidor remoto debería hacerlo así
-                //val lista = state.value.alumnos.toMutableList()
-                //val indexedValue = lista.indexOfFirst { a -> a.id == updated.id }
-                //lista[indexedValue] = updated
-                // updateState(lista)
-                updateState(
-                    state.value.alumnos.filter { it.id != updated.id } + updated
-                )
-                Ok(updated)
-            }
-    }
 
     // Elimina un alumno en el estado y repositorio
     fun eliminarCita(): Result<Unit, VehiculosError> {
-        logger.debug { "Eliminando Cita" }
-        // Hay que eliminar su imagen, primero siempre una copia!!!
-        val cita = state.value.vehiculoTablaSeleccionado.copy()
-        // Para evitar que cambien en la selección!!!
-
-        cita.fileImage?.let {
-            if (it.name != "images/notFound.png") {
-                storage.deleteImage(it)
-            }
-        }
-
-        // Borramos del repositorio
-        repository.deleteCita(cita.toCita())
-        // Actualizamos la lista
-        // Podriamos cargar del repositorio otra vez, si fuera concurente o
-        // conectada a un servidor remoto debería hacerlo así
-        updateState(state.value.citas.filter { it != cita.toCita() })
-        return Ok(Unit)
+     TODO()
     }
 
     fun setTipoOperacion(tipo: TipoOperacion) {

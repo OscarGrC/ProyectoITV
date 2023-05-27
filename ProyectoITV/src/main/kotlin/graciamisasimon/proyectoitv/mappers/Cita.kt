@@ -9,7 +9,6 @@ import graciamisasimon.proyectoitv.models.enums.TipoMotor
 import graciamisasimon.proyectoitv.models.enums.TipoTrabajador
 import graciamisasimon.proyectoitv.models.enums.TipoVehiculo
 import java.time.LocalDate
-import java.time.LocalDateTime
 
 fun Cita.toCitaDto():CitaDto{
     return CitaDto( estacionId = trabajador.estacionId,nombre= trabajador.nombre,telefono= trabajador.telefono,
@@ -20,7 +19,7 @@ fun Cita.toCitaDto():CitaDto{
     matricula=vehiculo.matricula,marca=vehiculo.marca,modelo=vehiculo.modelo,tipoVehiculo=vehiculo.tipoVehiculo.name,
     tipoMotor=vehiculo.tipoMotor.name,fechaMatriculacion=vehiculo.fechaMatriculacion.toString(),
         fechaUlimaRevision=vehiculo.fechaUlimaRevision.toString(),nombreCliente=vehiculo.propietario.nombre,
-        apellidos = vehiculo.propietario.apellidos,telefonoCliente=vehiculo.propietario.telefonoCliente,
+        apellidos = vehiculo.propietario.apellidos,telefonoCliente=vehiculo.propietario.telefonoCliente.toString(),
         correoCliente=vehiculo.propietario.correoCliente,dni=vehiculo.propietario.dni, imagen = vehiculo.imagen,
     // ahora la fecha de la cita y valores prueba
     fechaCita=fechaCita.toString(), horaCita = horaCita, frenado= valoresPruebas.frenado.toString(),
@@ -32,7 +31,8 @@ fun CitaDto.toCita():Cita {
     val localTrabajador = Trabajador(estacionId,nombre,telefono,correo,usuario, TipoTrabajador.valueOf(tipo),
         password,LocalDate.parse(fechaContratacion),plusGerencia.toBoolean()
         )
-    val localCliente = Cliente(nombre, apellidos, telefonoCliente, correoCliente, dni)
+    val localCliente = Cliente(nombre = nombre, apellidos =  apellidos, telefonoCliente =  telefonoCliente.toInt(),
+      correoCliente = correoCliente, dni =  dni)
     val localVehiculo = Vehiculo(
         matricula, marca, modelo, TipoVehiculo.valueOf(tipoVehiculo),
         TipoMotor.valueOf(tipoMotor), LocalDate.parse(fechaMatriculacion), LocalDate.parse(fechaUlimaRevision),

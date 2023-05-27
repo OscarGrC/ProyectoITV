@@ -36,12 +36,6 @@ class MainController  : KoinComponent {
     private lateinit var menuExportar: MenuItem
 
     @FXML
-    private lateinit var menuZip: MenuItem
-
-    @FXML
-    private lateinit var menuUnzip: MenuItem
-
-    @FXML
     private lateinit var menuSalir: MenuItem
 
     @FXML
@@ -54,6 +48,8 @@ class MainController  : KoinComponent {
     //Combo
     @FXML
     private lateinit var comboTipo: ComboBox<String>
+    @FXML
+    private lateinit var comboEstacion: ComboBox<String>
 
     // Tabla
     @FXML
@@ -329,12 +325,12 @@ class MainController  : KoinComponent {
             return
         }
         Alert(Alert.AlertType.CONFIRMATION).apply {
-            title = "Eliminar Vehiculo"
-            headerText = "¿Desea eliminar este alumno?"
+            title = "Eliminar "
+            headerText = "¿Desea eliminar ?"
             contentText = "Esta acción no se puede deshacer y se eliminarán todos los datos asociados."
         }.showAndWait().ifPresent { buttonType ->
             if (buttonType == ButtonType.OK) {
-                viewModel.eliminarAlumno().onSuccess {
+                viewModel.eliminarCita().onSuccess {
                     logger.debug { "eliminado correctamente" }
                 }.onFailure {
                     logger.error { "Error al eliminar " }
