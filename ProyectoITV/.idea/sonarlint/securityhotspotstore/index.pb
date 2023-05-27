@@ -9,8 +9,6 @@ u
 Esrc/main/kotlin/graciamisasimon/proyectoitv/errors/VehiculosErrors.kt,0\a\0ac0bc8b84f466a278a263164afc8ba7e7bb7b77
 z
 Jsrc/main/kotlin/graciamisasimon/proyectoitv/models/enums/TipoTrabajador.kt,c\2\c21bf6e59cffff22bc07ed746907300b36e0a87f
-m
-=src/main/kotlin/graciamisasimon/proyectoitv/ITVApplication.kt,b\2\b2b16a5fa153b510df856db9acfa9a3bbc4fb191
 s
 Csrc/main/kotlin/graciamisasimon/proyectoitv/routes/RoutesManager.kt,1\a\1a84fbf13474e7fe2ead917904d345c873a3a859
 p
@@ -21,8 +19,6 @@ t
 Dsrc/main/kotlin/graciamisasimon/proyectoitv/models/ValoresPruebas.kt,8\7\8769432ad4d85ab3c8895d8a821c16c698505136
 n
 >src/main/kotlin/graciamisasimon/proyectoitv/models/Vehiculo.kt,d\8\d8d21465b8a9f0d7b20d8982baec0e11b29f157e
-<
-build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
 p
 @src/main/kotlin/graciamisasimon/proyectoitv/models/InformeITV.kt,c\4\c4356db3557396ff72c8275bf6fc3ae76ca6ca35
 k
@@ -33,5 +29,3 @@ y
 Isrc/main/kotlin/graciamisasimon/proyectoitv/repositories/ITVRepository.kt,3\a\3a7221f4468713726defc0145789e60743b955d7
 w
 Gsrc/main/kotlin/graciamisasimon/proyectoitv/viewmodels/MainViewModel.kt,5\c\5c4df1e5a06c8fe1a7027089016d946a9f725aba
-y
-Isrc/main/kotlin/graciamisasimon/proyectoitv/controllers/MainController.kt,4\1\4175ade0845d130c34c93b8c19594cca7c6ded84
