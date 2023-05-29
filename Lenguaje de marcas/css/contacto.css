@@ -1,5 +1,6 @@
 * {
     margin: 0;
+    font-family: Arial;
 }
 
 body {
@@ -68,7 +69,7 @@ a.nav:hover {
     margin-left: 0.5rem;
 }
 
-section.textos-header {
+div.textos-header {
     display: flex;
     flex-direction: column;
     align-items: center;
