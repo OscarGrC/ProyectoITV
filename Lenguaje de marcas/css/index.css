@@ -103,14 +103,15 @@ img.presentacion-butom {
 }
 
 img.infoImage {
-    width: 100%;
+    width:70%;
     border-radius: 0.5rem;
+    margin-left: 15%;
 }
 
 div.info {
     display: flex;
     justify-content: center;
-    gap: 5%;
+    
     margin-top: 5rem;
     margin-bottom: 3rem;
 }
@@ -175,10 +176,14 @@ img.servicios-img {
     color: #0071b9;
     margin-top: 0.5rem;
 }
-
+@font-face {
+    font-family: 'MiFuentePersonalizada';
+    src: url('bilbao.TTF') format('truetype');
+  }
 .servicios-titulo {
     color: #003A61;
     font-size: 3rem;
+    font-family: 'MiFuentePersonalizada';;
 }
 
 div.contenedor-footer {
