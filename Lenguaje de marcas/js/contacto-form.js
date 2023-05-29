@@ -29,10 +29,15 @@ botonEnviar.addEventListener("click", function (event) {
     // Verificar si todos los campos están completos
     if (nombre != "" && apellido != "" && regexDNI.test(dni) && regexEmail.test(correo) && regexTelefono.test(telefono) && regexMatricula.test(matricula) && modelo != "" && tipoCoche != "" && marca != "" && tipoMotor != "" && lugar != "") {
         // Cambiar el color del botón a azul
-        botonEnviar.style.backgroundColor = "blue";
+        botonEnviar.style.backgroundColor = "#1e88e5";
 
-        // Enviar el formulario por correo (código de envío de correo aquí)
-        // ...
+        // Enviar el formulario por correo 
+        
+        // Obtener la informacion del formulario 
+        const form1 = document.getElementById("miFormulario1").value;
+        const form2 = document.getElementById("miFormulario2").value;
+        const form3 = document.getElementById("miFormulario3").value;
+        
     } else {
         // Mostrar mensaje de error si faltan campos
         alert("Por favor, completa todos los campos del formulario.");
